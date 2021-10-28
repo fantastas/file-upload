@@ -1,15 +1,16 @@
 import { Injectable, Res } from '@nestjs/common';
 import * as fs from 'fs';
+
 @Injectable()
 export class AppService {
-  async sgetAllFilePaths(@Res() res) {
-    const result = [];
+  rezultatai: any = [];
+  getAllFilePaths(@Res() res) {
+    this.rezultatai = [];
     fs.readdir('./uploaded', (err, files) => {
       files.forEach((file) => {
-        console.log(file);
-        result.push(file);
+        this.rezultatai.push(file);
       });
+      res.json(this.rezultatai);
     });
-    await res.json(result);
   }
 }

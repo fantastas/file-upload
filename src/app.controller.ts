@@ -17,8 +17,8 @@ export class AppController {
 
   @Get()
   async getFiles(@Res() res) {
-    const files = await this.appService.sgetAllFilePaths(res);
-    return files;
+    return await this.appService.getAllFilePaths(res);
+    // console.log(files);
   }
 
   // upload a single file
