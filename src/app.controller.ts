@@ -20,10 +20,20 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  // upload a single file
   @Post('files')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File, @Res() res) {
     res.json(file);
+  }
+  // upload multiple files
+  @Post('upload')
+  @UseInterceptors(FilesInterceptor('files'))
+  async uploadFiles(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Res() res,
+  ) {
+    res.json(files);
   }
 
   @Get(':filePath')
