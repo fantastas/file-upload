@@ -16,8 +16,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getFiles(@Res() res) {
+    const files = await this.appService.sgetAllFilePaths(res);
+    return files;
   }
 
   // upload a single file
