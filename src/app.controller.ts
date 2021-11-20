@@ -25,7 +25,8 @@ export class AppController {
   @Post('files')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File, @Res() res) {
-    res.json(file);
+    const fileNmae = file.originalname;
+    res.json(fileNmae);
   }
   // upload multiple files
   @Post('upload')
